@@ -16,8 +16,6 @@ create table comments (
     image text null
 );
 ```
-<br>
-<br>
 
 ## Frontend Setup
 Go into the backend directory (`bobyard-frontend`) and run `npm install` <br>
