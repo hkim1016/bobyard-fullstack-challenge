@@ -1,9 +1,9 @@
 const Pool = require('pg').Pool;
 const pool = new Pool({
-    user: 'ENTER YOUR POSTGRES USERNAME', // CHANGE TO YOUR POSTGRES USERNAME
+    user: 'hkim', // CHANGE TO YOUR POSTGRES USERNAME
     host: 'localhost',
-    database: 'ENTER YOUR POSTGRES DB NAME', // CHANGE TO YOUR POSTGRES DB NAME
-    password: 'ENTER YOUR POSTGRES USER PASSWORD', // CHANGE TO YOUR POSTGRES USER PASSWORD
+    database: 'bobyard', // CHANGE TO YOUR POSTGRES DB NAME
+    password: 'august27', // CHANGE TO YOUR POSTGRES USER PASSWORD
     port: 5432,
 });
 
@@ -23,8 +23,8 @@ const seedDb = async (comments) => {
     for (const comment of comments) {
         console.log(`inserting ${comment} into table`);
         await pool.query(
-            'INSERT INTO comments (author, text, date, likes, image) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [comment.author, comment.text, comment.date, comment.likes, comment.image],
+            'INSERT INTO comments (id, parent, author, text, date, likes, image) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+            [parseInt(comment.id  || '-1'), parseInt(comment.parent || '-1'), comment.author, comment.text, comment.date, comment.likes, comment.image],
             (error, results) => {
                 if (error) {
                     console.log('failed to insert comment', comment, error);
@@ -37,7 +37,7 @@ const seedDb = async (comments) => {
 };
 
 const getAllComments = (req, res) => {
-    pool.query('SELECT * FROM comments ORDER BY id ASC ', (error, results) => {
+    pool.query('SELECT * FROM comments ORDER BY id ASC', (error, results) => {
         if (error) {
             console.log('failed to get all comments', error);
             throw error;
