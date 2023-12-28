@@ -1,9 +1,9 @@
 const Pool = require('pg').Pool;
 const pool = new Pool({
-    user: 'hkim', // CHANGE TO YOUR POSTGRES USERNAME
+    user: 'USERNAME', // CHANGE TO YOUR POSTGRES USERNAME
     host: 'localhost',
-    database: 'bobyard', // CHANGE TO YOUR POSTGRES DB NAME
-    password: 'august27', // CHANGE TO YOUR POSTGRES USER PASSWORD
+    database: 'DB NAME', // CHANGE TO YOUR POSTGRES DB NAME
+    password: 'PASSWORD', // CHANGE TO YOUR POSTGRES USER PASSWORD
     port: 5432,
 });
 
